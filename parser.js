@@ -19,7 +19,6 @@ function rediuceEachExpr(p) {
 function merge(p) {
 	var poly = {};
 	var	array = p.str.split("+");
-	console.log(array);
 	for (var i = 0; i < array.length; i++) {
 		var first = parseFloat(array[i]);
 		var last = parseFloat(array[i].split("^")[1]);
@@ -27,7 +26,12 @@ function merge(p) {
 			poly[last] = 0;
 		poly[last] += first;
 	}
-	console.log(poly);
+	var dest = [];
+	for (key in poly) {
+		dest.push(poly[key] + "X^" + key);
+		p.degree = key;
+	}
+	p.str = dest.join("+").replace(/\+\-/g, "-").replace(/\+/g, " + ").replace(/\-/g, " - ");
 }
 
 module.exports = {

@@ -1,5 +1,6 @@
 function Polynom (str) {
 	this.str = str;
+	this.degree = 0;
 
 	this.write = function () {
 		console.log (this.str + " = 0");
