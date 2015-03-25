@@ -1,40 +1,44 @@
-function rediuceEachExpr(p) {
-	var array = p.splitNoSpace();
-	var	dest = [];
+module.exports.reduce = function (p) {
+	
+	var array = p.splitNoSpace(),
+		res = [];
 	for (var i = 0; i < array.length; i++) {
-		var arrayMult = array[i].split("*");
-		var exp = [1];
-		for (var j = 0; j < arrayMult.length; j++) {
-			if (!isNaN(arrayMult[j]))
-				exp[0] *= parseFloat(arrayMult[j]);
+		
+		var split = array[i].split("*"),
+			exp = [1];
+
+		for (var j = 0; j < split.length; j++) {
+			if (!isNaN(split[j]))
+				exp[0] *= parseFloat(split[j]);
 			else
-				exp.push(arrayMult[j]);
+				exp.push(split[j]);
 		}
-		arrayMult[i] = exp.join("*");
-		dest.push(arrayMult[i]);
+
+		split[i] = exp.join("*");
+		res.push(split[i]);
 	}
-	p.str = dest.join("+");
+	p.str = res.join("+");
 }
 
-function merge(p) {
-	var poly = {};
-	var	array = p.str.split("+");
+module.exports.merge = function (p) {
+	
+	var poly = {},
+		array = p.str.split("+");
+	
 	for (var i = 0; i < array.length; i++) {
-		var first = parseFloat(array[i]);
-		var last = parseFloat(array[i].split("^")[1]);
+		var first = parseFloat(array[i]),
+			last = parseFloat(array[i].split("^")[1]);
+			
 		if (!poly[last])
 			poly[last] = 0;
 		poly[last] += first;
 	}
-	var dest = [];
+	
+	var res = [];
 	for (key in poly) {
-		dest.push(poly[key] + "X^" + key);
+		res.push(poly[key] + "X^" + key);
 		p.degree = key;
 	}
-	p.str = dest.join("+").replace(/\+\-/g, "-").replace(/\+/g, " + ").replace(/\-/g, " - ");
-}
-
-module.exports = {
-	rediuceEachExpr: rediuceEachExpr,
-	merge: merge
+	
+	p.str = res.join("+").replace(/\+\-/g, "-").replace(/\+/g, " + ").replace(/\-/g, " - ");
 }
