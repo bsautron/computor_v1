@@ -17,7 +17,7 @@ module.exports.reduce = function (p) {
 		split[i] = exp.join("*");
 		res.push(split[i]);
 	}
-	p.str = res.join("+");
+	p.str = res.join("+").replace("NaN+", "");
 }
 
 module.exports.merge = function (p) {
@@ -28,7 +28,7 @@ module.exports.merge = function (p) {
 	for (var i = 0; i < array.length; i++) {
 		var first = parseFloat(array[i]),
 			last = parseFloat(array[i].split("^")[1]);
-			
+
 		if (!poly[last])
 			poly[last] = 0;
 		poly[last] += first;

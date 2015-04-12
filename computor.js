@@ -9,6 +9,7 @@ function cleanArray (array) {
 
 var Polynom = require ("./polynom"),
 	Parser = require ("./parser"),
+	Solver = require ("./solver"),
 
 	arg = (function () {
 		var argv = process.argv;
@@ -39,4 +40,4 @@ Parser.reduce(p);
 Parser.merge(p);
 console.log("Reduced form:", p.str, "= 0");
 console.log("Polynomial degree:", p.degree);
-
+console.log ("solution:", Solver.solve(p));
