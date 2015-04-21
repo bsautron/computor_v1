@@ -41,7 +41,7 @@ var Polynom = require ("./polynom"),
 							.replace(/X\^/g, "x^")
 							.replace(/X/g, "x^1")
 							.replace(/x/g, "X");
-		console.log(noSpace);
+		// console.log(noSpace);
 		
 		// var test = noSpace.split(/[\+\-=]/g).filter(notNull),
 		// 	signs = noSpace.match(/[\+\-=]/g);
@@ -66,10 +66,11 @@ var Polynom = require ("./polynom"),
 	p = new Polynom(arg);
 
 p.reduce();
-/*
-p.splitEqual();
-Parser.reduce(p);
-Parser.merge(p);
-console.log("Reduced form:", p.str, "= 0");
-console.log("Polynomial degree:", p.degree);
-console.log ("solution:", Solver.solve(p));*/
+p.merge();
+// console.log(p.str);
+// p.splitEqual();
+// Parser.reduce(p);
+// Parser.merge(p);
+// console.log("Reduced form:", p.str, "= 0");
+// console.log("Polynomial degree:", p.degree);
+// console.log ("solution:", Solver.solve(p));*/

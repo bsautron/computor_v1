@@ -22,6 +22,7 @@ module.exports.reduce = function (p) {
 
 module.exports.merge = function (p) {
 	
+	
 	var poly = {},
 		array = p.str.split("+");
 	
