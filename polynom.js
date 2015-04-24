@@ -41,7 +41,7 @@ Polynom.prototype.reduce = function () {
 		elem[i] = signe[i] + noPuiss + "X^"  + puiss;
 	}
 
-	// console.log(elem);
+	// console.log(elem.join(""));
 
 	// console.log("Reduced form: " + elem.join("")
 	// 									.replace(/\-/g, " - ")
@@ -55,6 +55,7 @@ Polynom.prototype.reduce = function () {
 
 
 Polynom.prototype.merge = function () {
+	console.log(this.str);
 	var array = this.str.split(/[\+\-=]/g).filter(function (element) {
 		if (element != '')
 			return true;
@@ -68,6 +69,32 @@ Polynom.prototype.merge = function () {
 			this.degree = array[i].split(/X\^/)[1];
 	}
 	console.log("Polynomial degree: " + this.degree);
+	console.log(array);
+	console.log(signe);
+	var poly = [],
+		realPoly= [];
+	for (i = 0; i <= this.degree; i++) {
+		poly.push(0);
+		poly[i] = 0;
+		for (j = 0; array[j]; j++) {
+			if (array[j].split(/\^/g)[1] == i) {
+				if (signe[j] == "-")
+					poly[i] -= parseFloat(array[j].split(/X/g)[0]);
+				else
+					poly[i] += parseFloat(array[j].split(/X/g)[0]);
+			}
+
+		}
+		if (parseFloat(poly[i]) != 0)
+			realPoly.push(poly[i] + "X^" + i);
+	}
+	// console.log(realPoly);
+	this.str = realPoly.join("+")
+						.replace(/\+\-/g, "-") + "=0";
+	console.log("Reduced form: " + this.str.replace(/\-/g, " - ")
+											.replace(/\+/g, " + ")
+											.replace(/=/g, " = ")
+											.replace(/X/g, " * X"));
 	// console.log(array);
 	// console.log(signe);
 }
