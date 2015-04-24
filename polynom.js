@@ -1,5 +1,6 @@
 function Polynom (str) {
 	this.str = str;
+	this.goodStr;
 	this.degree = 0;
 
 	// this.splitNoSpace = function () {
@@ -55,7 +56,6 @@ Polynom.prototype.reduce = function () {
 
 
 Polynom.prototype.merge = function () {
-	console.log(this.str);
 	var array = this.str.split(/[\+\-=]/g).filter(function (element) {
 		if (element != '')
 			return true;
@@ -69,8 +69,6 @@ Polynom.prototype.merge = function () {
 			this.degree = array[i].split(/X\^/)[1];
 	}
 	console.log("Polynomial degree: " + this.degree);
-	console.log(array);
-	console.log(signe);
 	var poly = [],
 		realPoly= [];
 	for (i = 0; i <= this.degree; i++) {
@@ -88,15 +86,12 @@ Polynom.prototype.merge = function () {
 		if (parseFloat(poly[i]) != 0)
 			realPoly.push(poly[i] + "X^" + i);
 	}
-	// console.log(realPoly);
 	this.str = realPoly.join("+")
 						.replace(/\+\-/g, "-") + "=0";
-	console.log("Reduced form: " + this.str.replace(/\-/g, " - ")
-											.replace(/\+/g, " + ")
-											.replace(/=/g, " = ")
-											.replace(/X/g, " * X"));
-	// console.log(array);
-	// console.log(signe);
+	this.goodStr = this.str.replace(/\-/g, " - ")
+							.replace(/\+/g, " + ")
+							.replace(/=/g, " = ")
+							.replace(/X/g, " * X");
 }
 
 Polynom.prototype.splitEqual = function () {

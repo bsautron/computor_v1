@@ -67,6 +67,7 @@ var Polynom = require ("./polynom"),
 
 p.reduce();
 p.merge();
+console.log("Reduced form: " + p.goodStr);
 // console.log(p.str);
 // p.splitEqual();
 // Parser.reduce(p);
