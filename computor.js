@@ -67,6 +67,8 @@ var Polynom = require ("./polynom"),
 
 p.reduce();
 p.merge();
+p.degreeMax();
+console.log("Polynomial degree: " + p.degree);
 console.log("Reduced form: " + p.goodStr);
 // console.log(p.str);
 // p.splitEqual();

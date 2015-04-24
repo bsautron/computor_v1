@@ -26,7 +26,8 @@ Polynom.prototype.reduce = function () {
 		});
 
 	for (i = 0; elem[i]; i++) {
-		var puiss = elem[i].match(/[\^][0-9]/g);
+		var puiss = elem[i].match(/[\^][0-9]+/g);
+		// console.log(puiss);
 		if (puiss) {
 			for (j = 0; puiss[j]; j++) {
 				puiss[j] = puiss[j].replace(/\^/, "");
@@ -36,7 +37,7 @@ Polynom.prototype.reduce = function () {
 			puiss = "0";
 		}
 
-		var	noPuiss = eval(elem[i].replace(/[\^][0-9]/g, "")
+		var	noPuiss = eval(elem[i].replace(/[\^][0-9]+/g, "")
 								.replace(/X/g, "")
 								.replace(/\*$/, ""));
 		elem[i] = signe[i] + noPuiss + "X^"  + puiss;
@@ -44,7 +45,7 @@ Polynom.prototype.reduce = function () {
 
 	// console.log(elem.join(""));
 
-	// console.log("Reduced form: " + elem.join("")
+	// console.log("PD form: " + elem.join("")
 	// 									.replace(/\-/g, " - ")
 	// 									.replace(/\+/g, " + ")
 	// 									.replace(/=/g, " = ")
@@ -63,15 +64,14 @@ Polynom.prototype.merge = function () {
 		}),
 		signe = this.str.match(/[\+\-=]/g);
 
-	var max = this.degree;
+	var maxDegree = 0;
 	for (i = 0; array[i]; i++) {
-		if (array[i].split(/X\^/)[1] > this.degree)
-			this.degree = array[i].split(/X\^/)[1];
+		if (array[i].split(/X\^/)[1] > maxDegree)
+			maxDegree = array[i].split(/X\^/)[1];
 	}
-	console.log("Polynomial degree: " + this.degree);
 	var poly = [],
 		realPoly= [];
-	for (i = 0; i <= this.degree; i++) {
+	for (i = 0; i <= maxDegree; i++) {
 		poly.push(0);
 		poly[i] = 0;
 		for (j = 0; array[j]; j++) {
@@ -92,6 +92,21 @@ Polynom.prototype.merge = function () {
 							.replace(/\+/g, " + ")
 							.replace(/=/g, " = ")
 							.replace(/X/g, " * X");
+}
+
+Polynom.prototype.degreeMax = function () {
+	var array = this.str.split(/[\+\-=]/g).filter(function (element) {
+		if (element != '')
+			return true;
+		return false;
+		});
+	this.degree = 0;
+	for (i = 0; array[i]; i++) {
+		if (array[i].split(/X\^/)[1] > this.degree)
+			this.degree = array[i].split(/X\^/)[1];
+	}
+
+
 }
 
 Polynom.prototype.splitEqual = function () {
