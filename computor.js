@@ -1,5 +1,4 @@
 var Polynom = require ("./polynom"),
-	Parser = require ("./parser"),
 	Solver = require ("./solver"),
 	arg = (function () {
 		var argv = process.argv,
@@ -40,7 +39,7 @@ p.merge();
 p.degreeMax();
 console.log("Reduced form: " + p.goodStr);
 console.log("Polynomial degree: " + p.degree);
-// console.log(p.str);
+Solver.solve(p);
 // p.splitEqual();
 // Parser.reduce(p);
 // Parser.merge(p);

@@ -73,7 +73,11 @@ Polynom.prototype.merge = function () {
 	this.goodStr = this.str.replace(/\-/g, " - ")
 							.replace(/\+/g, " + ")
 							.replace(/=/g, " = ")
-							.replace(/X/g, " * X");
+							.replace(/X/g, " * X")
+							.replace(/\ \*\ X\^0/g, "")
+							.replace(/X\^1/g, "X");
+	if (this.str[0] !== '-')
+		this.str = "+" + this.str;
 }
 
 Polynom.prototype.degreeMax = function () {
@@ -84,7 +88,7 @@ Polynom.prototype.degreeMax = function () {
 		});
 
 	this.degree = 0;
-	
+
 	for (i = 0; array[i]; i++) {
 		if (array[i].split(/X\^/)[1] > this.degree)
 			this.degree = array[i].split(/X\^/)[1];

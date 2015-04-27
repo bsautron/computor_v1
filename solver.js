@@ -13,34 +13,30 @@ function format (split) {
 function Solver (options) {
 
   this.solveForOne = function (polynom) {
-    var split = polynom.str.split(" ");
+    var array = polynom.str.split(/[\+\-=]/g),
+        signe = polynom.str.match(/[\-\+=]/g),
+        neg = false,
+        q = "";
+    array.shift();
 
-    var right = (function () {
-      var ret = "";
-      for (var i = 0; i < split.length; i++) {
-        if (split[i].indexOf("X^0") > -1) {
-          ret = split[i][0] == "-" ? split[i].slice(1) : "-" + split[i];
-          split.splice(i, 1);
-        }
-      }
-      return (ret);
-    })().replace("X^0", "");
+    if (array.length == 3) {
+      if (signe[0] === '+')
+        neg = !neg;
+      if (signe[1] === '-')
+        neg = !neg;
 
-    var left = (function () {
-      var ret = "";
-      for (var i = 0; i < split.length; i++) {
-        if (split[i].indexOf("X^1") > -1)
-          ret = format(split)[i];
-      }
-      return (ret);
-    })().replace("X^1", "");
-
-    if (right[0] == '-' && left[0] == '-') {
-      left = left.slice(1);
-      right = right.slice(1);
+      q = parseFloat(array[0]) + " / " + parseFloat(array[1]);
+      if (neg)
+        q = "- " + q;    
     }
-    return right + "/" + left;
+    else
+      q = "0";
+
+    console.log("The solution is:");
+    console.log(q);
+    console.log(eval(q.replace(/\s/g, "")));
   }
+
 
   this.solveForTwo = function (polynom) {
     var split = polynom.str.split(" ");
