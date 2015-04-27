@@ -42,3 +42,5 @@ p.degreeMax();
 console.log("Reduced form: " + p.goodStr);
 console.log("Polynomial degree: " + p.degree);
 Solver.solve(p);
+
+
