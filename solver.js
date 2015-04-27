@@ -12,7 +12,12 @@ function format (split) {
 
 function Solver (options) {
 
-  this.solveForOne = function (polynom) {
+  this.solveForZero = function(polynom) {
+    console.log("Solutions are:");
+    console.log("X ∈ R")
+  }
+
+  this.solveForOne = function(polynom) {
     var array = polynom.str.split(/[\+\-=]/g),
         signe = polynom.str.match(/[\-\+=]/g),
         neg = false,
@@ -87,8 +92,9 @@ function Solver (options) {
   }
 
   this.solve = function (polynom) {
-    if (polynom.degree == 1) return this.solveForOne (polynom)   
-    if (polynom.degree == 2) return this.solveForTwo (polynom)   
+    if (polynom.degree == 0) return this.solveForZero(polynom)
+    if (polynom.degree == 1) return this.solveForOne(polynom)   
+    if (polynom.degree == 2) return this.solveForTwo(polynom)   
   }
 }
 

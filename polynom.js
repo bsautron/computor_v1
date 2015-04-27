@@ -93,6 +93,8 @@ Polynom.prototype.degreeMax = function () {
 		if (array[i].split(/X\^/)[1] > this.degree)
 			this.degree = array[i].split(/X\^/)[1];
 	}
+	if (this.degree == 0)
+		this.goodStr = "I can't reduce that!";
 }
 
 module.exports = Polynom;

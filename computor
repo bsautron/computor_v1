@@ -1,4 +1,5 @@
 #!/usr/local/bin/node
+
 var Polynom = require ("./polynom"),
 	Solver = require ("./solver"),
 	arg = (function () {
