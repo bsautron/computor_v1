@@ -16,15 +16,25 @@ Polynom.prototype.reduce = function () {
 
 	for (i = 0; elem[i]; i++) {
 		var puiss = elem[i].match(/[\^][0-9]+/g),
-			noPuiss = eval(elem[i].replace(/[\^][0-9]+/g, "")
+			noPuiss = elem[i].replace(/[\^][0-9]+/g, "")
 								.replace(/X/g, "")
-								.replace(/\*$/, ""));
+								.replace(/\*$/, "")
+								.split(/\*/g),
+			nn = 1;
+			
+		for (j = 0; noPuiss[j]; j++) {
+			nn *= noPuiss[j];
+		}
+		noPuiss = nn;
+		
 
 		if (puiss) {
+			var pp = 0;
 			for (j = 0; puiss[j]; j++) {
 				puiss[j] = puiss[j].replace(/\^/, "");
+				pp += parseFloat(puiss[j]);
 			}
-			puiss = eval(puiss.join("\+"));
+			puiss = pp.toString();
 		}
 		else
 			puiss = "0";
@@ -32,7 +42,6 @@ Polynom.prototype.reduce = function () {
 	}
 
 	this.str = elem.join("");
-	return (elem.join(""));
 }
 
 

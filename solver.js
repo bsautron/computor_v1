@@ -89,7 +89,6 @@ function Solver (options) {
       if (sp[1] == 0) c = signe[i] + sp[0];
     }
 
-    console.log("a: " + a + " b: " + b + " c: " + c)
     delta = (b * b - 4 * a * c).toString();
     if (delta > 0) {
       var racineDelta = sqrt(delta),
