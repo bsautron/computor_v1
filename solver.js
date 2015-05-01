@@ -4,6 +4,7 @@ function sqrt(number) {
 }
 
 function pgcd(n1, n2) {
+  console.log(n1 + " et " + n2);
   if (n1 < 0)
     n1 = -n1;
   if (n2 < 0)
@@ -36,25 +37,39 @@ function Solver (options) {
     var array = polynom.str.split(/[\+\-=]/g),
         signe = polynom.str.match(/[\-\+=]/g),
         neg = false,
+        pg,
+        nume,
+        denom,
         q = "";
     array.shift();
-
+  
+    nume = parseFloat(array[0]);
+    denom = parseFloat(array[1]);
     if (array.length == 3) {
       if (signe[0] === '+')
         neg = !neg;
       if (signe[1] === '-')
         neg = !neg;
-
-      q = parseFloat(array[0]) + " / " + parseFloat(array[1]);
+  	if (nume == parseInt(array[0])
+          && denom == parseInt(array[1])
+        	&& ( pg = pgcd(nume, denom) )) {
+      nume /= pg;
+      denom /= pg;
+      q = nume + ((denom != 1) ? " / " + denom : "");
       if (neg)
-        q = "- " + q;    
+        q = "-" + q;  
+    }
+    else {
+      q = (nume / denom).toString();
+    }
+  
     }
     else
       q = "0";
 
     console.log("The solution is:");
     console.log(q);
-    console.log(eval(q.replace(/\s/g, "")));
+    console.log("la vrai = " + eval(q.replace(/\s/g, "")));
   }
 
 
@@ -121,7 +136,6 @@ function Solver (options) {
         x2 = n2 / d2;
       }
 
-//      console.log(racineDelta);
       console.log("Solutions are: ");
       console.log(x1);
       console.log(x2);
@@ -140,49 +154,7 @@ function Solver (options) {
       console.log(x1);
       console.log(x2);
     }
-    // var a = (function () {
-    //   var ret = "";
-    //   for (var i = 0; i < array.length; i++) {
-    //     if (array[i].indexOf("X^2") > -1)
-    //       ret = format(array)[i];
-    //   }
-    //   return parseInt(ret.replace("X^2", ""));
-    // })();
-
-    // var b = (function () {
-    //   var ret = "";
-    //   for (var i = 0; i < array.length; i++) {
-    //     if (array[i].indexOf("X^1") > -1)
-    //       ret = format(array)[i];
-    //   }
-    //   return parseFloat(ret.replace("X^1", ""));
-    // })();
-
-    // var c = (function () {
-    //   var ret = "";
-    //   for (var i = 0; i < array.length; i++) {
-    //     if (array[i].indexOf("X^0") > -1)
-    //       ret = format(array)[i];
-    //   }
-    //   return parseFloat(ret.replace("X^0", "").replace(/-+/g, "-"));
-    // })();
-
-    // var delta = (function () {
-    //   return b * b - 4 * a * c;
-    // })();
-
-    // if (delta < 0)
-    //   return "aucune solution";
-    // else if (delta == 0)
-    //   return -b / 2 * a;
-
-    // console.log ("delta " + delta);
-
-    // var x1 = (-b - sqrt(delta)) / 2 * a;
-    // var x2 = (-b + sqrt(delta)) / 2 * a;
-
-    // return x1 + " et " + x2;
-
+  
   }
 
   this.solveForOver = function(polynom) {
