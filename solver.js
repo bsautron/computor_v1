@@ -4,7 +4,6 @@ function sqrt(number) {
 }
 
 function pgcd(n1, n2) {
-  console.log(n1 + " et " + n2);
   if (n1 < 0)
     n1 = -n1;
   if (n2 < 0)
@@ -69,7 +68,6 @@ function Solver (options) {
 
     console.log("The solution is:");
     console.log(q);
-    console.log("la vrai = " + eval(q.replace(/\s/g, "")));
   }
 
 
@@ -93,7 +91,6 @@ function Solver (options) {
 
     console.log("a: " + a + " b: " + b + " c: " + c)
     delta = (b * b - 4 * a * c).toString();
-
     if (delta > 0) {
       var racineDelta = sqrt(delta),
           n1 = -b + racineDelta,
@@ -115,7 +112,7 @@ function Solver (options) {
         if (d1 < 0)
           neg = !neg;
         x1 = (neg ? "-" : "") + ((n1 < 0) ? -n1 : n1);
-        if (d1 != 1)
+        if (d1 != 1 && d1 != -1)
           x1 += " / " + ((d1 < 0) ? -d1 : d1);
         
         neg = false;
@@ -128,7 +125,7 @@ function Solver (options) {
         if (d2 < 0)
           neg = !neg;
         x2 = (neg ? "-" : "") + ((n2 < 0) ? -n2 : n2)
-        if (d2 != 1)
+        if (d2 != 1 && d2 != -1)
           x2 += " / " + ((d2 < 0) ? -d2 : d2);
       }
       else {
@@ -141,7 +138,9 @@ function Solver (options) {
       console.log(x2);
     }
     else if (delta == 0) {
-      var x0 = -b + " / " + (2 * a);
+      var x0 = -b;
+      if (x0)
+        x0 += " / " + (2 * a);
       console.log("Solution is: ");
       console.log(x0);
       // console.log(eval(x0));

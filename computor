@@ -4,7 +4,9 @@ var Polynom = require ("./polynom"),
 	Solver = require ("./solver"),
 	arg = (function () {
 		var argv = process.argv,
-			noSpace = argv[2].replace(/[\s]+/g, ""),
+			noSpace = argv[2].replace(/[\s]+/g, "")
+								.replace(/x/g, "X")
+								.replace(/x²/ig, "X^2"),
 			equal = noSpace.split(/=/);
 
 		if (argv.length != 3) {
