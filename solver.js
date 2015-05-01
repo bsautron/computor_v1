@@ -1,9 +1,24 @@
 
-function sqrt (number) {
+function sqrt(number) {
   return Math.sqrt(number);
 }
 
-function format (split) {
+function pgcd(n1, n2) {
+  if (n1 < 0)
+    n1 = -n1;
+  if (n2 < 0)
+    n2 = -n2;
+  while (n1 * n2 != 0) {
+    if (n1 > n2)
+      n1 -= n2;
+    else 
+      n2 -= n1;
+  }
+  if (n1 == 0) return (n2);
+  return (n1);
+}
+
+function format(split) {
   for (var i = 0; i < split.length; i++) {
     if (split[i] == "-") split[i + 1] = "-" + split[i + 1];
   }
@@ -14,7 +29,7 @@ function Solver (options) {
 
   this.solveForZero = function(polynom) {
     console.log("Solutions are:");
-    console.log("X ∈ R")
+    console.log("X ∈ R");
   }
 
   this.solveForOne = function(polynom) {
@@ -65,13 +80,48 @@ function Solver (options) {
     delta = (b * b - 4 * a * c).toString();
 
     if (delta > 0) {
-      console.log(delta);
       var racineDelta = sqrt(delta),
           n1 = -b + racineDelta,
           n2 = -b - racineDelta,
-          d = 2 * a,
-          x1 = n1 + " / " + d,
-          x2 = n2 + " / " + d;
+          d1 = 2 * a,
+          d2 = 2 * a,
+          x1,
+          x2,
+          pg,
+          neg = false;
+          
+      if (parseFloat(racineDelta) == parseInt(racineDelta)) {
+        if (pg = pgcd(n1, d1)) {
+          n1 /= pg;
+          d1 /= pg;
+        }
+        if (n1 < 0)
+          neg = !neg;
+        if (d1 < 0)
+          neg = !neg;
+        x1 = (neg ? "-" : "") + ((n1 < 0) ? -n1 : n1);
+        if (d1 != 1)
+          x1 += " / " + ((d1 < 0) ? -d1 : d1);
+        
+        neg = false;
+        if (pg = pgcd(n2, d2)) {
+          n2 /= pg;
+          d2 /= pg;
+        }
+        if (n2 < 0)
+          neg = !neg;
+        if (d2 < 0)
+          neg = !neg;
+        x2 = (neg ? "-" : "") + ((n2 < 0) ? -n2 : n2)
+        if (d2 != 1)
+          x2 += " / " + ((d2 < 0) ? -d2 : d2);
+      }
+      else {
+        x1 = n1 / d1;
+        x2 = n2 / d2;
+      }
+
+//      console.log(racineDelta);
       console.log("Solutions are: ");
       console.log(x1);
       console.log(x2);
@@ -84,8 +134,8 @@ function Solver (options) {
     }
     else {
       racineDelta = delta.replace(/\-/g, "i√(") + ')';
-      var x1 = "( " + -b + " + " + racineDelta + " ) / " + (2 * a),
-          x2 = "( " + -b + " - " + racineDelta + " ) / " + (2 * a);
+      var x1 = ((-b) ? "( " + -b + "+" : "") + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a),
+          x2 = ((-b) ? "( " + -b : "") + "-" + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a);
       console.log("Solutions complexe are: ");
       console.log(x1);
       console.log(x2);
