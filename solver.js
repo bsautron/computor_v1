@@ -3,6 +3,14 @@ function sqrt(number) {
   return Math.sqrt(number);
 }
 
+function ftSqrt(a) {
+  for (i = 0; i < a / 2; i++) {
+    if (i * i == a)
+      return (i.toString());
+  }
+  return ("√" + a.toString());
+}
+
 function pgcd(n1, n2) {
   if (n1 < 0)
     n1 = -n1;
@@ -90,17 +98,17 @@ function Solver (options) {
     }
 
     delta = (b * b - 4 * a * c).toString();
+    console.log("Delta = " + delta);
     if (delta > 0) {
-      var racineDelta = sqrt(delta),
-          n1 = -b + racineDelta,
-          n2 = -b - racineDelta,
+      var racineDelta = ftSqrt(delta),
+          n1 = -b + ((racineDelta[0] == '√') ? " + " + racineDelta : parseInt(racineDelta)),
+          n2 = -b + ((racineDelta[0] == '√') ? " - " + racineDelta : parseInt("-" + racineDelta)),
           d1 = 2 * a,
           d2 = 2 * a,
           x1,
           x2,
           pg,
           neg = false;
-          
       if (parseFloat(racineDelta) == parseInt(racineDelta)) {
         if (pg = pgcd(n1, d1)) {
           n1 /= pg;
@@ -128,8 +136,8 @@ function Solver (options) {
           x2 += " / " + ((d2 < 0) ? -d2 : d2);
       }
       else {
-        x1 = n1 / d1;
-        x2 = n2 / d2;
+        x1 = ((racineDelta[0] == '√') ? "(" + n1 + ")/" : n1 + "/") + d1;
+        x2 = ((racineDelta[0] == '√') ? "(" + n2 + ")/" : n2 + "/") + d2;
       }
 
       console.log("Solutions are: ");
