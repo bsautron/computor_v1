@@ -6,7 +6,8 @@ var Polynom = require ("./polynom"),
 		var argv = process.argv,
 			noSpace = argv[2].replace(/[\s]+/g, "")
 								.replace(/x/g, "X")
-								.replace(/x²/ig, "X^2"),
+								.replace(/x²/ig, "X^2")
+								.replace(/−/g, "-"),
 			equal = noSpace.split(/=/);
 
 		if (argv.length != 3) {

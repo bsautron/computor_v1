@@ -99,6 +99,7 @@ function Solver (options) {
 
     delta = (b * b - 4 * a * c).toString();
     console.log("Delta = " + delta);
+    
     if (delta > 0) {
       var racineDelta = ftSqrt(delta),
           n1 = -b + ((racineDelta[0] == '√') ? " + " + racineDelta : parseInt(racineDelta)),
@@ -109,6 +110,7 @@ function Solver (options) {
           x2,
           pg,
           neg = false;
+          
       if (parseFloat(racineDelta) == parseInt(racineDelta)) {
         if (pg = pgcd(n1, d1)) {
           n1 /= pg;
@@ -141,13 +143,30 @@ function Solver (options) {
       }
 
       console.log("Solutions are: ");
-      console.log(x1);
       console.log(x2);
+      console.log(x1);
     }
     else if (delta == 0) {
-      var x0 = -b;
-      if (x0)
-        x0 += " / " + (2 * a);
+      var x0,
+          n0 = -b,
+          d0 = 2 * a,
+          pg,
+          neg = false;
+          
+      if (n0 < 0) {
+        n0 = -n0;
+        neg = !neg;
+      }
+      if (d0 < 0) {
+        d0 = -d0;
+        neg = !neg;
+      }
+      if (pg = pgcd(n0, d0))
+      {
+        n0 /= pg;
+        d0 /= pg;
+      }
+      x0 = ((neg) ? "- " : "") + n0 + " / " + d0;
       console.log("Solution is: ");
       console.log(x0);
       // console.log(eval(x0));
