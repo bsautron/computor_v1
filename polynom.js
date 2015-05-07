@@ -10,7 +10,7 @@ function Polynom (str) {
 	this.coeff = {
 		"a" : 0,
 		"b" : 0,
-		"b" : 0,
+		"c" : 0,
 	}
 }
 

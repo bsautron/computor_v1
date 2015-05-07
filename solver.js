@@ -1,4 +1,3 @@
-
 function sqrt(number) {
   return Math.sqrt(number);
 }
@@ -146,10 +145,11 @@ function Solver() {
         x1 = ((racineDelta[0] == '√') ? "(" + n1 + ")/" : n1 + "/") + d1;
         x2 = ((racineDelta[0] == '√') ? "(" + n2 + ")/" : n2 + "/") + d2;
       }
-
+      x0 = (b / 2 * a);
       console.log("Solutions are: ");
       console.log(x1);
       console.log(x2);
+      polynom.solution["x0"] = x0;
       polynom.solution["x1"] = x1;
       polynom.solution["x2"] = x2;
     }
@@ -178,12 +178,11 @@ function Solver() {
       console.log(x0);
       polynom.solution["x0"] = x0;
       
-      // console.log(eval(x0));
     }
     else {
-      racineDelta = delta.replace(/\-/g, "i√(") + ')';
-      var x1 = ((-b) ? "( " + -b + "+" : "") + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a),
-          x2 = ((-b) ? "( " + -b : "") + "-" + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a);
+      racineDelta = delta.replace(/\-/g, "i√");
+      var x1 = ((-b) ? "( " + -b + " + " : "") + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a),
+          x2 = ((-b) ? "( " + -b : "") + " - " + racineDelta + ((-b) ? " )" : "") + " / " + (2 * a);
       console.log("Solutions complexe are: ");
       console.log(x1);
       console.log(x2);
