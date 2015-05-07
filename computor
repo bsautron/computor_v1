@@ -38,7 +38,18 @@ var Polynom = require("./Polynom"),
 
 	p = new Polynom(arg);
 
-
+for (i = 0; i < arg.length; i++) {
+	if ((arg[i] < '0' || arg[i] > '9')
+			&& arg[i] != '-'
+			&& arg[i] != '+'
+			&& arg[i] != 'x'
+			&& arg[i] != 'X'
+			&& arg[i] != '='
+			&& arg[i] != '^') {
+			console.log("Syntax Error");
+			return ;		
+		}
+}
 
 p.reduce();
 p.merge();
