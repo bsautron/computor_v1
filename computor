@@ -1,7 +1,8 @@
 #!/usr/local/bin/node
 
-var Polynom = require ("./polynom"),
-	Solver = require ("./solver"),
+var Polynom = require("./Polynom"),
+	Solver = require("./Solver"),
+	Analyse = require("./Analyse")
 	arg = (function () {
 		var argv = process.argv,
 			noSpace = argv[2].replace(/[\s]+/g, "")
@@ -45,5 +46,4 @@ p.degreeMax();
 console.log("Reduced form: " + p.goodStr);
 console.log("Polynomial degree: " + p.degree);
 Solver.solve(p);
-
-
+Analyse.all(p);

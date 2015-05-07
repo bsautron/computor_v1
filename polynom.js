@@ -2,6 +2,16 @@ function Polynom (str) {
 	this.str = str;
 	this.goodStr;
 	this.degree = 0;
+	this.solution = {
+		"x0" : "",
+		"x1" : "",
+		"x2" : "",
+	};
+	this.coeff = {
+		"a" : 0,
+		"b" : 0,
+		"b" : 0,
+	}
 }
 
 Polynom.prototype.reduce = function () {

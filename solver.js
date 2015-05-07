@@ -33,7 +33,7 @@ function format(split) {
   return (split);
 }
 
-function Solver (options) {
+function Solver() {
 
   this.solveForZero = function(polynom) {
     console.log("Solutions are:");
@@ -76,6 +76,7 @@ function Solver (options) {
 
     console.log("The solution is:");
     console.log(q);
+    polynom.solution["x0"] = q; 
   }
 
 
@@ -89,13 +90,17 @@ function Solver (options) {
         delta;
 
     array.shift();
-
+  
     for (var i = 0; array[i]; i++) {
       sp = array[i].split("X^");
       if (sp[1] == 2) a = signe[i] + sp[0];
       if (sp[1] == 1) b = signe[i] + sp[0];
       if (sp[1] == 0) c = signe[i] + sp[0];
     }
+    
+    polynom.coeff["a"] = a;
+    polynom.coeff["b"] = b;
+    polynom.coeff["c"] = c;
 
     delta = (b * b - 4 * a * c).toString();
     console.log("Delta = " + delta);
@@ -143,8 +148,10 @@ function Solver (options) {
       }
 
       console.log("Solutions are: ");
-      console.log(x2);
       console.log(x1);
+      console.log(x2);
+      polynom.solution["x1"] = x1;
+      polynom.solution["x2"] = x2;
     }
     else if (delta == 0) {
       var x0,
@@ -169,6 +176,8 @@ function Solver (options) {
       x0 = ((neg) ? "- " : "") + n0 + " / " + d0;
       console.log("Solution is: ");
       console.log(x0);
+      polynom.solution["x0"] = x0;
+      
       // console.log(eval(x0));
     }
     else {
@@ -178,8 +187,10 @@ function Solver (options) {
       console.log("Solutions complexe are: ");
       console.log(x1);
       console.log(x2);
+      polynom.solution["x1"] = x1;
+      polynom.solution["x2"] = x2;
     }
-  
+
   }
 
   this.solveForOver = function(polynom) {
@@ -194,6 +205,6 @@ function Solver (options) {
   }
 }
 
-module.exports = new Solver ({});
+module.exports = new Solver();
 
 
