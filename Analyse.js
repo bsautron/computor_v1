@@ -33,10 +33,14 @@ function repeate(c, nb) {
 function Analyse () {
 	
 	this.tableauSigne = function(polynom) {
+		polynom.solution["x0"] = polynom.solution["x0"].replace(/\s/g, "");
+		polynom.solution["x1"] = polynom.solution["x1"].replace(/\s/g, "");
+		polynom.solution["x2"] = polynom.solution["x2"].replace(/\s/g, "");
+		
 		var max = max3(polynom.solution["x0"].toString().length, polynom.solution["x1"].toString().length, polynom.solution["x2"].toString().length);
 		if (polynom.degree == 1 || (polynom.degree == 2 && (polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"]) >= 0) )
 			console.log("\nSigns of the polynomial:");
-			
+		
 		if (polynom.degree == 1) {
 			var signe = polynom.str.match(/[\-\+]/g);
 			console.log("+---+---" + repeate("-", 5 * max + 6)+ "---+");
