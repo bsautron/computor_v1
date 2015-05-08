@@ -5,16 +5,22 @@ var Polynom = require("./Polynom"),
 	Analyse = require("./Analyse")
 	arg = (function () {
 
-		
+		console.log(process.argv[2])
 		var argv = process.argv,
 			noSpace = argv[2].replace(/[\s]+/g, "")
+								.replace(/\+\-/g, "-")
+								.replace(/\-\+/g, "-")
+								.replace(/\-\-/g, "+")
+								.replace(/\+\+/g, "+")
 								.replace(/x/g, "X")
 								.replace(/x²/ig, "X^2")
 								.replace(/−/g, "-"),
 			equal = noSpace.split(/=/);
 		
-		if (equal.length > 2)
-			return (false);
+		if (equal.length > 2) {
+			console.log("Syntax Error");
+			process.exit(1);
+		}
 
 		
 		if (argv.length != 3) {
@@ -48,8 +54,7 @@ var Polynom = require("./Polynom"),
 
 
 if (arg == false) {
-	console.log("Syntax Error");
-	return ;
+	
 }
 var elem = arg.split(/[\+\-=]/g);
 	
@@ -58,12 +63,9 @@ elem.push("end");
 for (i = 0; i < elem.indexOf("end"); i++) {
 	if (elem[i] == '' && i < elem.indexOf("end") - 1) {
 		console.log("Syntax Error");
-		 return ;
+		process.exit(1);		
 	}
 }
-
-
-
 
 for (i = 0; i < arg.length; i++) {
 	if ((arg[i] < '0' || arg[i] > '9')
@@ -73,10 +75,11 @@ for (i = 0; i < arg.length; i++) {
 			&& arg[i] != 'X'
 			&& arg[i] != '='
 			&& arg[i] != '^'
-			&& arg[i] != '.') {
-			console.log("Syntax Error");
-			return ;		
-		}
+			&& arg[i] != '.'
+			&& arg[i] != '*') {
+		console.log("Syntax Error");
+		process.exit(1);		
+	}
 }
 
 
