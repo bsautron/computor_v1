@@ -33,11 +33,11 @@ function repeate(c, nb) {
 function Analyse () {
 	
 	this.tableauSigne = function(polynom) {
-		polynom.solution["x0"] = polynom.solution["x0"].replace(/\s/g, "");
-		polynom.solution["x1"] = polynom.solution["x1"].replace(/\s/g, "");
-		polynom.solution["x2"] = polynom.solution["x2"].replace(/\s/g, "");
+		polynom.solution["x0"] = polynom.solution["x0"].toString().replace(/\s/g, "");
+		polynom.solution["x1"] = polynom.solution["x1"].toString().replace(/\s/g, "");
+		polynom.solution["x2"] = polynom.solution["x2"].toString().replace(/\s/g, "");
 		
-		var max = max3(polynom.solution["x0"].toString().length, polynom.solution["x1"].toString().length, polynom.solution["x2"].toString().length);
+		var max = max3(polynom.solution["x0"].length, polynom.solution["x1"].length, polynom.solution["x2"].length);
 		if (polynom.degree == 1 || (polynom.degree == 2 && (polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"]) >= 0) )
 			console.log("\nSigns of the polynomial:");
 		
@@ -156,7 +156,7 @@ function Analyse () {
 				else
 					q += ((neg) ? " - " : " + ") + nume + " / " + deno;
 				
-				console.log(q);
+				console.log("\nCanonical form: " + q);
 		}
 	}
 	

@@ -102,7 +102,7 @@ function Solver() {
     polynom.coeff["c"] = c;
 
     delta = (b * b - 4 * a * c).toString();
-    console.log("Delta = " + delta);
+    console.log("𝚫 = " + delta);
     
     if (delta > 0) {
       var racineDelta = ftSqrt(delta),
@@ -142,8 +142,8 @@ function Solver() {
           x2 += " / " + ((d2 < 0) ? -d2 : d2);
       }
       else {
-        x1 = ((racineDelta[0] == '√') ? "(" + n1 + ")/" : n1 + "/") + d1;
-        x2 = ((racineDelta[0] == '√') ? "(" + n2 + ")/" : n2 + "/") + d2;
+        x1 = ((racineDelta[0] == '√') ? "(" + n1 + ") / " : n1 + " / ") + d1;
+        x2 = ((racineDelta[0] == '√') ? "(" + n2 + ") / " : n2 + " / ") + d2;
       }
       x0 = (b / 2 * a);
       console.log("Solutions are: ");

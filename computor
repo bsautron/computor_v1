@@ -55,6 +55,6 @@ p.reduce();
 p.merge();
 p.degreeMax();
 console.log("Reduced form: " + p.goodStr);
-console.log("Polynomial degree: " + p.degree);
+console.log("Polynomial degree: " + p.degree + "\n");
 Solver.solve(p);
 Analyse.all(p);
