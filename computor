@@ -5,9 +5,14 @@ var Polynom = require("./Polynom"),
 	Analyse = require("./Analyse")
 	arg = (function () {
 
-		console.log(process.argv[2])
-		var argv = process.argv,
-			noSpace = argv[2].replace(/[\s]+/g, "")
+		var argv = process.argv;
+		
+		if (argv.length != 3) {
+			console.log ("Error: Wrong number of arguments");
+			process.exit(1);
+		}
+		
+		var noSpace = argv[2].replace(/[\s]+/g, "")
 								.replace(/\+\-/g, "-")
 								.replace(/\-\+/g, "-")
 								.replace(/\-\-/g, "+")
@@ -17,16 +22,12 @@ var Polynom = require("./Polynom"),
 								.replace(/−/g, "-"),
 			equal = noSpace.split(/=/);
 		
-		if (equal.length > 2) {
+		if (equal.length != 2) {
 			console.log("Syntax Error");
 			process.exit(1);
 		}
 
 		
-		if (argv.length != 3) {
-			console.log ("Error: Wrong number of arguments");
-			process.exit(1);
-		}
 
 		if (equal[0][0] != "-" && equal[0][0] != "+")
 			equal[0] = "+" + equal[0];
