@@ -72,7 +72,8 @@ for (i = 0; i < arg.length; i++) {
 			&& arg[i] != 'x'
 			&& arg[i] != 'X'
 			&& arg[i] != '='
-			&& arg[i] != '^') {
+			&& arg[i] != '^'
+			&& arg[i] != '.') {
 			console.log("Syntax Error");
 			return ;		
 		}

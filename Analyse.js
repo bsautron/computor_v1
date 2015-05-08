@@ -1,4 +1,6 @@
 function pgcd(n1, n2) {
+  if (!(n1 % 1) || !(n2 % 1))
+  	return (0);
   if (n1 < 0)
     n1 = -n1;
   if (n2 < 0)
@@ -125,7 +127,9 @@ function Analyse () {
 	}
 	
 	this.canonique = function(polynom) {
+		
 		if ((polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"]) >= 0) {
+			
 				var nume = polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"],
 					deno = (4 * polynom.coeff["a"]),
 					q,
