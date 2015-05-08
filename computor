@@ -4,13 +4,19 @@ var Polynom = require("./Polynom"),
 	Solver = require("./Solver"),
 	Analyse = require("./Analyse")
 	arg = (function () {
+
+		
 		var argv = process.argv,
 			noSpace = argv[2].replace(/[\s]+/g, "")
 								.replace(/x/g, "X")
 								.replace(/x²/ig, "X^2")
 								.replace(/−/g, "-"),
 			equal = noSpace.split(/=/);
+		
+		if (equal.length > 2)
+			return (false);
 
+		
 		if (argv.length != 3) {
 			console.log ("Error: Wrong number of arguments");
 			process.exit(1);
@@ -20,6 +26,8 @@ var Polynom = require("./Polynom"),
 			equal[0] = "+" + equal[0];
 		if (equal[1][0] != "-" && equal[1][0] != "+")
 			equal[1] = "+" + equal[1];
+			
+	
 
 		equal[1] = equal[1].replace(/\+/g, "moin")
 							.replace(/\-/g, "plus")
@@ -38,6 +46,25 @@ var Polynom = require("./Polynom"),
 
 	p = new Polynom(arg);
 
+
+if (arg == false) {
+	console.log("Syntax Error");
+	return ;
+}
+var elem = arg.split(/[\+\-=]/g);
+	
+elem.shift();
+elem.push("end");
+for (i = 0; i < elem.indexOf("end"); i++) {
+	if (elem[i] == '' && i < elem.indexOf("end") - 1) {
+		console.log("Syntax Error");
+		 return ;
+	}
+}
+
+
+
+
 for (i = 0; i < arg.length; i++) {
 	if ((arg[i] < '0' || arg[i] > '9')
 			&& arg[i] != '-'
@@ -50,6 +77,7 @@ for (i = 0; i < arg.length; i++) {
 			return ;		
 		}
 }
+
 
 p.reduce();
 p.merge();

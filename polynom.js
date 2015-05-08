@@ -17,12 +17,8 @@ function Polynom (str) {
 Polynom.prototype.reduce = function () {
 	var elem = this.str.split(/[\+\-=]/g),
 		signe = this.str.match(/[\-\+=]/g);
-
-	elem = elem.filter(function (element) {
-		if (element != '')
-			return true;
-		return false;
-		});
+	
+	elem.shift();
 
 	for (i = 0; elem[i]; i++) {
 		var puiss = elem[i].match(/[\^][0-9]+/g),
@@ -56,16 +52,13 @@ Polynom.prototype.reduce = function () {
 
 
 Polynom.prototype.merge = function () {
-	var array = this.str.split(/[\+\-=]/g).filter(function (element) {
-		if (element != '')
-			return true;
-		return false;
-		}),
+	var array = this.str.split(/[\+\-=]/g),
 		signe = this.str.match(/[\+\-=]/g),
 		maxDegree = 0,
 		poly = [],
 		realPoly= [];
-		
+	array.shift();
+	
 	for (i = 0; array[i]; i++) {
 		if (array[i].split(/X\^/)[1] > maxDegree)
 			maxDegree = array[i].split(/X\^/)[1];
@@ -100,11 +93,8 @@ Polynom.prototype.merge = function () {
 }
 
 Polynom.prototype.degreeMax = function () {
-	var array = this.str.split(/[\+\-=]/g).filter(function (element) {
-		if (element != '')
-			return true;
-		return false;
-		});
+	var array = this.str.split(/[\+\-=]/g);
+	array.shift();
 
 	this.degree = 0;
 
