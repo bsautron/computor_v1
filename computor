@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/nfs/zfs-student-4/users/2014/bsautron/.brew/bin/node
 
 var Polynom = require("./Polynom"),
 	Solver = require("./Solver"),
@@ -82,7 +82,6 @@ for (i = 0; i < arg.length; i++) {
 		process.exit(1);		
 	}
 }
-
 
 p.reduce();
 p.merge();
