@@ -1,9 +1,5 @@
-function sqrt(number) {
-  return Math.sqrt(number);
-}
-
 function ftSqrt(a) {
-  for (i = 0; i < a / 2; i++) {
+  for (i = 0; i < a / 2 + 1; i++) {
     if (i * i == a)
       return (i.toString());
   }
