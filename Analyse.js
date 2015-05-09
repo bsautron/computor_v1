@@ -155,12 +155,12 @@ function Analyse () {
 					neg = !neg;
 				}
 				if (deno == 1)
-					q += nume;
+					q += ((neg) ? " - " : " + ") + nume;
 				else if (nume == 0)
 					q += 0;
 				else
 					q += ((neg) ? " - " : " + ") + nume + " / " + deno;
-				
+				console.log(neg);
 				console.log("\nCanonical form: " + q);
 		}
 	}
