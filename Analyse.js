@@ -1,5 +1,6 @@
 function pgcd(n1, n2) {
-  if (!(n1 % 1) || !(n2 % 1))
+  if (parseFloat(n1).toString() != parseInt(n1).toString()
+  		|| parseFloat(n2).toString() != parseInt(n2).toString())
   	return (0);
   if (n1 < 0)
     n1 = -n1;
@@ -135,7 +136,7 @@ function Analyse () {
 					q,
 					pg,
 					neg = false;
-					
+				
 				if (pg = pgcd(nume, deno)) {
 					nume /= pg;
 					deno /= pg;

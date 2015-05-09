@@ -83,7 +83,6 @@ for (i = 0; i < arg.length; i++) {
 	}
 }
 
-
 p.reduce();
 p.merge();
 p.degreeMax();
