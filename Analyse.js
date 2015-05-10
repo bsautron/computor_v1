@@ -111,15 +111,15 @@ function Analyse () {
 				console.log("+---+---" + repeate("-", 8 * max + 3) + "---+");
 				console.log("| Y |   "
 								+ repeate(' ', max)
-								+ "+"
-								+ repeate(' ', 2 * max - 1)
-								+ "0"
-								+ repeate(' ', max)
 								+ "-"
 								+ repeate(' ', 2 * max - 1)
 								+ "0"
 								+ repeate(' ', max)
 								+ "+"
+								+ repeate(' ', 2 * max - 1)
+								+ "0"
+								+ repeate(' ', max)
+								+ "-"
 								+ repeate(' ', max)								
 								+ "   |");
 				console.log("+---+---" + repeate("-", 8 * max + 3) + "---+");
@@ -160,7 +160,6 @@ function Analyse () {
 					q += 0;
 				else
 					q += ((neg) ? " - " : " + ") + nume + " / " + deno;
-				console.log(neg);
 				console.log("\nCanonical form: " + q);
 		}
 	}
