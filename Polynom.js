@@ -80,6 +80,11 @@ Polynom.prototype.merge = function () {
 			realPoly.push(poly[i] + "X^" + i);
 	}
 
+	if (maxDegree == 0 && realPoly.length != 0) {
+		console.log("I can't resolve that!")
+		process.exit(1);
+	}
+
 	this.str = realPoly.join("+")
 						.replace(/\+\-/g, "-") + "=0";
 	this.goodStr = this.str.replace(/\-/g, " - ")
