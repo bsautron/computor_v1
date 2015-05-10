@@ -17,6 +17,7 @@ var Polynom = require("./Polynom"),
 								.replace(/\-\+/g, "-")
 								.replace(/\-\-/g, "+")
 								.replace(/\+\+/g, "+")
+								.replace(/∗/g, "*")
 								.replace(/x/g, "X")
 								.replace(/x²/ig, "X^2")
 								.replace(/−/g, "-"),
@@ -77,8 +78,9 @@ for (i = 0; i < arg.length; i++) {
 			&& arg[i] != '='
 			&& arg[i] != '^'
 			&& arg[i] != '.'
-			&& arg[i] != '*') {
-		console.log("Syntax Error");
+			&& arg[i] != '*'
+			&& arg[i] != '∗') {
+		console.log("Syntax Error: " + arg[i]);
 		process.exit(1);		
 	}
 }
