@@ -52,19 +52,17 @@ function Solver() {
         neg = !neg;
       if (signe[1] === '-')
         neg = !neg;
-  	if (nume == parseInt(array[0])
+      if (nume == parseInt(array[0])
           && denom == parseInt(array[1])
         	&& ( pg = pgcd(nume, denom) )) {
-      nume /= pg;
-      denom /= pg;
-      q = nume + ((denom != 1) ? " / " + denom : "");
-      if (neg)
-        q = "-" + q;  
-    }
-    else {
-      q = (nume / denom).toString();
-    }
-  
+        nume /= pg;
+        denom /= pg;
+        q = nume + ((denom != 1) ? " / " + denom : "");
+        if (neg)
+          q = "-" + q;  
+      }
+      else
+        q = (nume / denom).toString();
     }
     else
       q = "0";
@@ -169,7 +167,10 @@ function Solver() {
         n0 /= pg;
         d0 /= pg;
       }
-      x0 = ((neg) ? "- " : "") + n0 + " / " + d0;
+      if (b == 0)
+        x0 = "0";
+      else
+        x0 = ((neg) ? "- " : "") + n0 + " / " + d0;
       console.log("Solution is: ");
       console.log(x0);
       polynom.solution["x0"] = x0;

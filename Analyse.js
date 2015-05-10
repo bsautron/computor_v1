@@ -67,6 +67,28 @@ function Analyse () {
 							+ "   |");
 			console.log("+---+---" + repeate("-", 5 * max + 6)+ "---+");
 		}
+		else if (polynom.degree == 2 && polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"] == 0) {
+			console.log("+---+---" + repeate("-", 5 * max + 6)+ "---+");
+			console.log("| X | -∞"
+							+ repeate(' ', 2 * max + 3)
+							+ polynom.solution["x0"].replace(/\s/g, "")
+							+ repeate(' ', 2 * max + 3)
+							+ "+∞ |");
+							
+			console.log("+---+---" + repeate("-", 5 * max + 6)+ "---+");
+			
+			console.log("| Y |   "
+							+ repeate(' ', max)
+							+ ((polynom.coeff["a"] < 0) ? " - " : " + ")
+							+ repeate(' ', max)
+							+ repeate(' ', max - 1)
+							+ "0"
+							+ repeate(' ', max)
+							+ ((polynom.coeff["a"] < 0) ? " - " : " + ")
+							+ repeate(' ', max)
+							+ "   |");
+			console.log("+---+---" + repeate("-", 5 * max + 6)+ "---+");
+		}
 		else if (polynom.degree == 2) {
 			if (polynom.coeff["a"] > 0 && (polynom.coeff["b"] * polynom.coeff["b"] - 4 * polynom.coeff["a"] * polynom.coeff["c"]) > 0) {
 				console.log("+---+---" + repeate("-", 8 * max + 3) + "---+");
@@ -144,7 +166,7 @@ function Analyse () {
 				
 				q = ((polynom.coeff["a"][0].toString() == '+') ? polynom.coeff["a"].substr(1) : polynom.coeff["a"])
 							+ "(X "
-							+ ((polynom.solution["x0"] >= 0) ? "+ " + polynom.solution["x0"] : "- " + -polynom.solution["x0"])
+							+ ((polynom.solution["x0"][0] == '-') ? "- " + polynom.solution["x0"].substr(1) : "+ " + polynom.solution["x0"])
 							+ ")²";
 				if (nume < 0) {
 					nume = -nume;
