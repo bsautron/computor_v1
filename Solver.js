@@ -169,6 +169,8 @@ function Solver() {
       }
       if (b == 0)
         x0 = "0";
+      else if (d0 == 1)
+        x0 = n0;
       else
         x0 = ((neg) ? "- " : "") + n0 + " / " + d0;
       console.log("Solution is: ");
