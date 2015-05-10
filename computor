@@ -55,11 +55,13 @@ var Polynom = require("./Polynom"),
 	p = new Polynom(arg);
 
 
-if (arg == false) {
-	
+if (arg.match(/\^\-/g)) {
+	console.log("Syntax Error");
+	process.exit(1);
 }
+
 var elem = arg.split(/[\+\-=]/g);
-	
+
 elem.shift();
 elem.push("end");
 for (i = 0; i < elem.indexOf("end"); i++) {
