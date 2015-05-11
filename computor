@@ -12,11 +12,8 @@ var Polynom = require("./Polynom"),
 			process.exit(1);
 		}
 		
-		var noSpace = argv[2].replace(/\+\-/g, "-")
-								.replace(/\-\+/g, "-")
-								.replace(/\-\-/g, "+")
-								.replace(/\+\+/g, "+")
-								.replace(/∗/g, "*")
+		console.log("Begin with: " + argv[2] + "\n");
+		var noSpace = argv[2].replace(/∗/g, "*")
 								.replace(/x/g, "X")
 								.replace(/x²/ig, "X^2")
 								.replace(/–/g, "-"),
@@ -39,7 +36,11 @@ var Polynom = require("./Polynom"),
 			}
 		}
 
-		noSpace = noSpace.replace(/[\s]+/g, "");
+		noSpace = noSpace.replace(/[\s]+/g, "")
+								.replace(/\+\-/g, "-")
+								.replace(/\-\+/g, "-")
+								.replace(/\-\-/g, "+")
+								.replace(/\+\+/g, "+");
 		if (noSpace.match(/X[0-9]/g)) {
 			console.log("Syntax Error");
 			process.exit(7);
