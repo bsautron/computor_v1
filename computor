@@ -31,7 +31,7 @@ var Polynom = require("./Polynom"),
 				var esp = 1;
 
 			if (esp == 1 && scopes > 0 && noSpace[i].match(/[0-9\.]/)) {
-				console.log("Syntax Error " + noSpace[i]);
+				console.log("Syntax Error ");
 				process.exit(2);
 			}
 		}
@@ -107,8 +107,8 @@ for (i = 0; i < arg.length; i++) {
 			&& arg[i] != '.'
 			&& arg[i] != '*'
 			&& arg[i] != '∗') {
-		console.log("Syntax Error " + arg[i]);
-		process.exit(6);		
+		console.log("Syntax Error ");
+		process.exit(6);
 	}
 }
 
