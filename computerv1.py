@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+# Je t'aime ma Cherie d'amoure <3
+
 import sys
 import re
 from functionCalcul import *
