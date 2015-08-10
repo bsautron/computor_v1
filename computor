@@ -1,0 +1,121 @@
+#!/nfs/zfs-student-4/users/2014/bsautron/.brew/bin/node
+
+var Polynom = require("./Polynom"),
+	Solver = require("./Solver"),
+	Analyse = require("./Analyse")
+	arg = (function () {
+
+		var argv = process.argv;
+		
+		if (argv.length != 3) {
+			console.log ("Error: Wrong number of arguments");
+			process.exit(1);
+		}
+		
+		console.log("Begin with: " + argv[2] + "\n");
+		var noSpace = argv[2].replace(/∗/g, "*")
+								.replace(/x/g, "X")
+								.replace(/x²/ig, "X^2")
+								.replace(/–/g, "-"),
+			scopes = 0,
+			esp = 0;
+
+		for (i = 0; i < noSpace.length; i++) {
+			if (noSpace[i].match(/[0-9\.]/))
+				scopes++;
+			if (noSpace[i].match(/[\-\+=\^]/)){
+				scopes = 0;
+				esp = 0;
+			}
+			if (noSpace[i].match(/\s/) && scopes != 0)
+				var esp = 1;
+
+			if (esp == 1 && scopes > 0 && noSpace[i].match(/[0-9\.]/)) {
+				console.log("Syntax Error ");
+				process.exit(2);
+			}
+		}
+
+		noSpace = noSpace.replace(/[\s]+/g, "")
+								.replace(/\+\-/g, "-")
+								.replace(/\-\+/g, "-")
+								.replace(/\-\-/g, "+")
+								.replace(/\+\+/g, "+");
+		if (noSpace.match(/X[0-9]/g)) {
+			console.log("Syntax Error");
+			process.exit(7);
+		}
+
+		var equal = noSpace.split(/=/);
+		
+		if (equal.length != 2) {
+			console.log("Syntax Error");
+			process.exit(3);
+		}
+
+		
+
+		if (equal[0][0] != "-" && equal[0][0] != "+")
+			equal[0] = "+" + equal[0];
+		if (equal[1][0] != "-" && equal[1][0] != "+")
+			equal[1] = "+" + equal[1];
+			
+	
+
+		equal[1] = equal[1].replace(/\+/g, "moin")
+							.replace(/\-/g, "plus")
+							.replace(/moin/g, "-")
+							.replace(/plus/g, "+");
+
+		noSpace = equal.join("") + "=0";
+		noSpace = noSpace.replace(/\+X/g, "+1X")
+							.replace(/\-X/g, "-1X")
+							.replace(/X\^/g, "x^")
+							.replace(/X/g, "x^1")
+							.replace(/x/g, "X");
+
+		return (noSpace);
+	})(),
+
+	p = new Polynom(arg);
+
+
+if (arg.match(/\^\-/g)) {
+	console.log("Syntax Error");
+	process.exit(4);
+}
+
+var elem = arg.split(/[\+\-=]/g);
+
+elem.shift();
+elem.push("end");
+for (i = 0; i < elem.indexOf("end"); i++) {
+	if (elem[i] == '' && i < elem.indexOf("end") - 1) {
+		console.log("Syntax Error");
+		process.exit(5);		
+	}
+}
+
+for (i = 0; i < arg.length; i++) {
+	if ((arg[i] < '0' || arg[i] > '9')
+			&& arg[i] != '-'
+			&& arg[i] != '+'
+			&& arg[i] != 'x'
+			&& arg[i] != 'X'
+			&& arg[i] != '='
+			&& arg[i] != '^'
+			&& arg[i] != '.'
+			&& arg[i] != '*'
+			&& arg[i] != '∗') {
+		console.log("Syntax Error ");
+		process.exit(6);
+	}
+}
+
+p.reduce();
+p.merge();
+p.degreeMax();
+console.log("Reduced form: " + p.goodStr);
+console.log("Polynomial degree: " + p.degree + "\n");
+Solver.solve(p);
+Analyse.all(p);
